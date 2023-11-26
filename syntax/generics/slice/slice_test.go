@@ -44,9 +44,16 @@ func Test_Slice_Delete(t *testing.T) {
 		},
 		{
 			name:          "reduce the capacity by half",
+			s:             NewSlice[int](1, 2, 3, 4, 5, 6),
+			expectedSlice: NewSlice[int](1, 2),
+			expectedCap:   3,
+			deletedIdx:    []int{2, 5},
+		},
+		{
+			name:          "reduce the capacity",
 			s:             NewSlice[int](1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8),
 			expectedSlice: NewSlice[int](1, 2),
-			expectedCap:   16,
+			expectedCap:   4,
 			deletedIdx:    []int{2, 31},
 		},
 	}
