@@ -1,7 +1,5 @@
 package slice
 
-import "fmt"
-
 type ISlice[T comparable] interface {
 	Append(val T)
 	// Delete removes the elements slice[i:j]
@@ -39,21 +37,18 @@ func (s *Slice[T]) Append(val T) {
 
 func (s *Slice[T]) Delete(idxFrom int, idxTo int) {
 	_ = s.data[idxFrom:idxTo]
-	fmt.Println("cap before", cap(s.data))
 
 	m := len(s.data)
 	n := m - (idxTo - idxFrom + 1)
-	fmt.Println("m", m, "n", n, "cap", cap(s.data))
 	if 2*n < cap(s.data) {
-		s2 := make([]T, cap(s.data)/2)
+		s2 := make([]T, n, cap(s.data)/2)
 		copy(s2, s.data[:idxFrom])
 		copy(s2[idxFrom:], s.data[idxTo+1:])
 		s.data = s2
-		fmt.Println("cap after", cap(s.data))
-
+		return
 	}
 	s.data = append(s.data[:idxFrom], s.data[idxTo+1:]...)
-	fmt.Println("cap after, should no change", cap(s.data))
+	//fmt.Println("cap after, should no change", cap(s.data))
 
 }
 

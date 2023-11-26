@@ -72,7 +72,6 @@ func Test_Slice_Append(t *testing.T) {
 	a.Append(1)
 	a.Append(3)
 	a.Append(3)
-	fmt.Printf("%+v\n", a)
 	b = NewSlice[int](1, 2, 3)
 	isEqual, msg = Equal(a, b)
 	assert.Equal(t, isEqual, false)
